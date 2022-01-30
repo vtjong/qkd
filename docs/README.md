@@ -4,6 +4,9 @@
   <a href="https://qutech.nl" target="_blank"><img src="https://user-images.githubusercontent.com/10100490/151484481-7cedb7da-603e-43cc-890c-979fb66aeb60.png" width="25%" style="padding-right: 0%"/></a>
   <a href="https://iquhack.mit.edu/" target="_blank"><img src="https://user-images.githubusercontent.com/10100490/151647370-d161d5b5-119c-4db9-898e-cfb1745a8310.png" width="10%" style="padding-left: 0%"/> </a>
 </p>
+## Description
+For this challenge you will be tasked with creating an interface and method to use quantum key
+distribution to send an encrypted message between the members of your team.
 
 ## Our Solution
 
@@ -28,7 +31,7 @@ Chatting server is a platform of chatroom that maintains group messaging using s
 ### Protocols
 1. BB84 Protocol: Using randomly X basis and Z basis.
 2. B92 Protocol: Simplified BB84 protocol.
-3. Eckert's Protocol E92: Using quantum teleportation and Bell states instead of superposition.
+3. Eckert's Protocol E91: Using quantum teleportation and Bell states instead of superposition.
 
 ### Privacy Amplification
 “Since there is some error, we must assume that Eve may have successfully learned some of the key's bits. QKD protocols can employ a technique known as privacy amplification to reduce the information Eve has about the key down to an arbitrary level.”
