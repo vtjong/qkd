@@ -24,6 +24,8 @@ After obtaining the sifted key from QKD Algorithm, it is time to use the private
 Chatting server is a platform of chatroom that maintains group messaging using sockets. The chatroom server and clients are programmed by 'server_side.py' and 'client_side.py'.
 
 ### Website
+The chat website is programmed using Django. It contains all HTML, CSS, Python and javascript files.
+The website is used for the users to securely chat with each other. First there is a room name and then they add their name. Once inside the room a person can send a message. Now when a message is sent, information such as username, message content, and ip address is passed to the chatting server which will then safely encrypt the message. This chatting server gets the key from the Quantum Key Distribution making it safe and secure. 
 
 ## Resources:
 ### What QKD does?
