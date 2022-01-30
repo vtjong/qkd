@@ -1,0 +1,13 @@
+quantuminspire
+qiskit
+numpy
+matplotlib
+socket
+select
+sys
+sendgrid
+os
+base64
+pickle
+sendgrid.helpers.mail import *
+encrypt
