@@ -50,6 +50,7 @@ def E91_QKD(key_len, eavesdrop):
         bob_received.append(int(bits[-2]))
     return np.asarray(alice_bases), np.asarray(bob_bases), np.asarray(alice_received), np.asarray(bob_received)
 
+# correlation and verification methodology is based on and implementation by Isaac Scheinfeld, Stanford) using Pyquil.
 def correlation(obs1, obs2, bases1, bases2, i, j):
     match1 = np.nonzero(bases1 == i)
     match2 = np.nonzero(bases2 == j)
