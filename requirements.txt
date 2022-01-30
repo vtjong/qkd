@@ -1,5 +1,6 @@
 quantuminspire
 qiskit
+numpy
 matplotlib
 socket
 select
