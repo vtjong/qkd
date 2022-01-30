@@ -18,3 +18,13 @@ After obtaining the sifted key from QKD Algorithm, it is time to use the private
 Chatting server is a platform of chatroom that maintains group messaging using sockets.
 ### Website
 
+## Resources:
+### What QKD does?
+“Quantum key distribution is only used to produce and distribute a key, not to transmit any message data. This key can then be used with any chosen encryption algorithm to encrypt (and decrypt) a message, which can then be transmitted over a standard communication channel. The algorithm most commonly associated with QKD is the one-time pad, as it is provably secure when used with a secret, random key.[2] In real-world situations, it is often also used with encryption using symmetric key algorithms like the Advanced Encryption Standard algorithm.”
+
+### Protocols
+BB84 Protocol: Using randomly X basis and Z basis.
+B92 Protocol: Simplified BB84 protocol.
+Eckert's Protocol: Using quantum teleportation instead of 
+### Privacy Amplification
+“Since there is some error, we must assume that Eve may have successfully learned some of the key's bits. QKD protocols can employ a technique known as privacy amplification to reduce the information Eve has about the key down to an arbitrary level.”
