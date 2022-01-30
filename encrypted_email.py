@@ -2,7 +2,7 @@ import sendgrid
 import os
 from sendgrid.helpers.mail import *
 
-SEND_GRID_API_KEY = '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'
+SEND_GRID_API_KEY = "API KEY HERE"
 sg = sendgrid.SendGridAPIClient(api_key=SEND_GRID_API_KEY)
 from_email = Email("vyt3@cornell.edu")
 to_email = To("vyt3@cornell.edu")
