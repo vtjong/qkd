@@ -1,4 +1,6 @@
-from serverclient import send_secure_msg
+from clientserver.serverclient import send_secure_msg
+import sys
+sys.path.append('../')
 
 key = "Happy Hacking!"
 fullmsg = "Welcome to our MIT iQuHACK Project for QuTech."

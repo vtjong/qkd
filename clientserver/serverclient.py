@@ -1,8 +1,11 @@
+from encrypt import encrypter, decrypter
+from time import sleep
+import os
 import socket
 import pickle
-import os
-from time import sleep
-from encrypt import encrypter, decrypter
+import sys
+sys.path.append('../')
+
 
 def send_secure_msg(key, fullmsg, server_ip):
     """
@@ -23,6 +26,7 @@ def send_secure_msg(key, fullmsg, server_ip):
 
     print('Received msg: ', repr(server_reply.decode('utf8')))
 
+
 def receive_secure_msg(key, local_host):
     """
     Function [receive_secure_msg] receives an encrypted message [enc_msg] and
@@ -35,7 +39,7 @@ def receive_secure_msg(key, local_host):
         s.bind((HOST, PORT))
         s.listen()
         connection, addr = s.accept()
-        
+
         with connection:
             print('Connected by', addr)
             while True:
@@ -43,12 +47,10 @@ def receive_secure_msg(key, local_host):
                 try:
                     enc_msg = pickle.loads(data)
                     if enc_msg != b'':
-                        decryped_msg = decrypter(key,enc_msg)
+                        decryped_msg = decrypter(key, enc_msg)
                     if not enc_msg:
                         break
                     connection.sendall(decryped_msg.encode('utf8'))
                 except:
                     break
         s.close()
-
-    

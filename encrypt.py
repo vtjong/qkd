@@ -5,6 +5,7 @@ import hashlib
 from Crypto.Cipher import AES
 from Crypto.Random import get_random_bytes
 
+
 def msg_partitioner(fullmsg):
     """
     Function [msg_partitioner] partitions string msg into 16 byte chunks.
@@ -13,9 +14,11 @@ def msg_partitioner(fullmsg):
     count = len(fullmsg_barr)
     num_encryptions = count/16
     len_diff = count % 16
-        
-    msg_chunks = [(fullmsg_barr[i:i + 16]).decode('utf-8') for i in range(0, count, 16)]
+
+    msg_chunks = [(fullmsg_barr[i:i + 16]).decode('utf-8')
+                  for i in range(0, count, 16)]
     return msg_chunks
+
 
 def key_resizer(key):
     """
@@ -25,30 +28,53 @@ def key_resizer(key):
     key = hashlib.sha256(key).digest()
     return key
 
+
 def encrypter(key, fullmsg):
     """
     Function [encrypter] uses [key] to encrypt a message [fullmsg] according to 
-    AES (Advanced Encryption Standard). Returns encrypted msg for decryption.
+    AES (Advanced Encryption Standard). Returns encrypted msg (array of bytes)
+    for decryption.
     """
     key = key_resizer(key)
-    BS = AES.block_size     
+    BS = AES.block_size
 
     # Define lambda function to pad msg if insufficient length
-    pad = lambda s: s + (BS - len(s) % BS) * chr(BS - len(s) % BS)
+    def pad(s): return s + (BS - len(s) % BS) * chr(BS - len(s) % BS)
 
-    # Split msg 
+    # Split msg
     msg_chunks = msg_partitioner(fullmsg)
     enc_msg_chunks = []
     enc_msg_bytearr = b''
 
     # Pad msg and encrypt
     for msg in msg_chunks:
-        msg_array = base64.b64encode(pad(msg).encode('utf8'))   
+        msg_array = base64.b64encode(pad(msg).encode('utf8'))
         iv = get_random_bytes(AES.block_size)
-        cipher = AES.new(key= key, mode= AES.MODE_CFB,iv= iv)
+        cipher = AES.new(key=key, mode=AES.MODE_CFB, iv=iv)
         enc_msg = base64.b64encode(iv + cipher.encrypt(msg_array))
         enc_msg_chunks.append(enc_msg)
     return enc_msg_chunks
+
+
+def simple_encrypt(key, fullmsg):
+    """
+    Function [simple_encrypter] uses [key] to encrypt a message [fullmsg] according to 
+    AES (Advanced Encryption Standard). Returns short encrypted msg of bytes
+    for decryption.
+    """
+    key = key_resizer(key)
+    BS = AES.block_size
+
+    # Define lambda function to pad msg if insufficient length
+    def pad(s): return s + (BS - len(s) % BS) * chr(BS - len(s) % BS)
+
+    # Pad msg and encrypt
+    msg_array = base64.b64encode(pad(fullmsg).encode('utf8'))
+    iv = get_random_bytes(AES.block_size)
+    cipher = AES.new(key=key, mode=AES.MODE_CFB, iv=iv)
+    enc_msg = base64.b64encode(iv + cipher.encrypt(msg_array))
+    return enc_msg
+
 
 def decrypter(key, enc_msg_chunks):
     """
@@ -58,12 +84,11 @@ def decrypter(key, enc_msg_chunks):
     """
     key = key_resizer(key)
     # Define lambda function to unpad msg to get back original msg
-    unpad = lambda s: s[:-ord(s[-1:])]
+    def unpad(s): return s[:-ord(s[-1:])]
     plaintext = ""
 
     # Unpad msg and decrypt
     for enc_msg in enc_msg_chunks:
-        print(len(enc_msg_chunks))
         enc = base64.b64decode(enc_msg)
         iv = enc[:AES.block_size]
 
