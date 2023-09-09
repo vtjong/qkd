@@ -13,8 +13,7 @@ class Encrypted_Mail():
         self.to_email = to_email
         self.API_key()  # validate API key to use sendgrid
 
-    def API_key(self):
-        SEND_GRID_API_KEY = "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"
+    def API_key(self, SEND_GRID_API_KEY):
         self.sg = sendgrid.SendGridAPIClient(api_key=SEND_GRID_API_KEY)
 
     def send_encrypted_email(self, subject, textmsg):
